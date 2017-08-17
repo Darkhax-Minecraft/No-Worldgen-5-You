@@ -6,8 +6,8 @@ import net.minecraft.world.gen.MapGenBase;
 
 public class MapGenEmpty extends MapGenBase {
 
-	@Override
-	public void generate(World worldIn, int x, int z, ChunkPrimer primer) {
+    @Override
+    public void generate (World worldIn, int x, int z, ChunkPrimer primer) {
 
-	}
+    }
 }

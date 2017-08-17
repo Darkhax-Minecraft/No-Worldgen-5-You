@@ -6,8 +6,8 @@ import net.minecraft.world.gen.structure.MapGenNetherBridge;
 
 public class MapGenFortressEmpty extends MapGenNetherBridge {
 
-	@Override
-	public void generate(World worldIn, int x, int z, ChunkPrimer primer) {
+    @Override
+    public void generate (World worldIn, int x, int z, ChunkPrimer primer) {
 
-	}
+    }
 }

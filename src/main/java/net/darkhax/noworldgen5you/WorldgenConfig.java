@@ -9,7 +9,7 @@ import net.minecraftforge.common.config.Configuration;
 public class WorldgenConfig {
 
     private static Configuration config;
-	public static final Map<String, Boolean> settings = new HashMap<>();
+    public static final Map<String, Boolean> settings = new HashMap<>();
 
     public static Configuration initConfig (File file) {
 
@@ -23,11 +23,11 @@ public class WorldgenConfig {
             config.save();
         }
     }
-    
-    public static boolean isStructureDisabled(String type, boolean isCustom) {
-    	
-    	boolean result = config.getBoolean("disable_" + type, "map_structures", false, "Should " + type + " generation be disabled?" + (isCustom ? " Note that this is not a vanilla structure!" : ""));
-    	syncConfigData();
-    	return result;
+
+    public static boolean isStructureDisabled (String type, boolean isCustom) {
+
+        final boolean result = config.getBoolean("disable_" + type, "map_structures", false, "Should " + type + " generation be disabled?" + (isCustom ? " Note that this is not a vanilla structure!" : ""));
+        syncConfigData();
+        return result;
     }
 }

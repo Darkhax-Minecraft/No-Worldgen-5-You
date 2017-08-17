@@ -6,8 +6,8 @@ import net.minecraft.world.gen.structure.StructureOceanMonument;
 
 public class MapGenOceanMonumentEmpty extends StructureOceanMonument {
 
-	@Override
-	public void generate(World worldIn, int x, int z, ChunkPrimer primer) {
+    @Override
+    public void generate (World worldIn, int x, int z, ChunkPrimer primer) {
 
-	}
+    }
 }
