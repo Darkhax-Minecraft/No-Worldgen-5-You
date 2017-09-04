@@ -14,9 +14,11 @@ import net.darkhax.noworldgen5you.world.gen.MapGenWoodlandMansion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod(modid = "noworldgen5you", name = "No Worldgen 5 You", version = "@VERSION@", acceptedMinecraftVersions = "[1.12,1.12.2)")
@@ -33,15 +35,24 @@ public class NoWorldgen5You {
         log = event.getModLog();
         WorldgenConfig.initConfig(event.getSuggestedConfigurationFile());
         MinecraftForge.TERRAIN_GEN_BUS.register(this);
+              
+        // Config stuff
         SCATTERED_GEN = new MapGenScatteredFeaturesEmpty();
     }
 
     @SubscribeEvent
+    public void onChunkPopulated(Populate event) {
+        
+        if (WorldgenConfig.isPopulateDisabled(event.getType().name().toLowerCase())) {
+            
+            event.setResult(Result.DENY);
+        }
+    }
+    
+    @SubscribeEvent
     public void onMapGen (InitMapGenEvent event) {
 
-        final boolean isCustom = event.getType() == EventType.CUSTOM;
-
-        if (!WorldgenConfig.isStructureDisabled(!isCustom ? event.getType().name().toLowerCase() : event.getOriginalGen().getClass().toString(), isCustom)) {
+        if (!WorldgenConfig.isStructureDisabled(event.getType().name().toLowerCase())) {
 
             return;
         }
