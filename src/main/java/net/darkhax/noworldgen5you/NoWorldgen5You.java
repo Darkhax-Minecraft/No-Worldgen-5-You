@@ -3,12 +3,14 @@ package net.darkhax.noworldgen5you;
 import org.apache.logging.log4j.Logger;
 
 import net.darkhax.noworldgen5you.world.gen.MapGenEmpty;
+import net.darkhax.noworldgen5you.world.gen.MapGenEndCityEmpty;
 import net.darkhax.noworldgen5you.world.gen.MapGenFortressEmpty;
 import net.darkhax.noworldgen5you.world.gen.MapGenMineshaftEmpty;
 import net.darkhax.noworldgen5you.world.gen.MapGenOceanMonumentEmpty;
 import net.darkhax.noworldgen5you.world.gen.MapGenScatteredFeaturesEmpty;
 import net.darkhax.noworldgen5you.world.gen.MapGenStrongholdEmpty;
 import net.darkhax.noworldgen5you.world.gen.MapGenVillageEmpty;
+import net.darkhax.noworldgen5you.world.gen.MapGenWoodlandMansion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
@@ -82,7 +84,15 @@ public class NoWorldgen5You {
             case VILLAGE:
                 event.setNewGen(new MapGenVillageEmpty());
                 break;
-
+                
+            case END_CITY:
+                event.setNewGen(new MapGenEndCityEmpty());
+                break;
+                
+            case WOODLAND_MANSION:
+                event.setNewGen(new MapGenWoodlandMansion());
+                break;
+                
             default:
                 break;
 
