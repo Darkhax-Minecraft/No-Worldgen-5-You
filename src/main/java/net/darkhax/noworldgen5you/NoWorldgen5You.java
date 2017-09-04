@@ -84,15 +84,15 @@ public class NoWorldgen5You {
             case VILLAGE:
                 event.setNewGen(new MapGenVillageEmpty());
                 break;
-                
+
             case END_CITY:
                 event.setNewGen(new MapGenEndCityEmpty());
                 break;
-                
+
             case WOODLAND_MANSION:
                 event.setNewGen(new MapGenWoodlandMansion());
                 break;
-                
+
             default:
                 break;
 

@@ -7,18 +7,18 @@ import net.minecraft.world.gen.structure.MapGenEndCity;
 public class MapGenEndCityEmpty extends MapGenEndCity {
 
     public MapGenEndCityEmpty () {
-        
+
         super(null);
     }
-    
+
     @Override
     public void generate (World worldIn, int x, int z, ChunkPrimer primer) {
 
     }
-    
+
     @Override
-    public boolean canSpawnStructureAtCoords(int chunkX, int chunkZ) {
-        
+    public boolean canSpawnStructureAtCoords (int chunkX, int chunkZ) {
+
         return false;
     }
 }
