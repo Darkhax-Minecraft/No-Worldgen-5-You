@@ -23,6 +23,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class NoWorldgen5You {
 
     private static Logger log;
+    
+    //Done early for config reasons
+    private static MapGenScatteredFeaturesEmpty SCATTERED_GEN;
 
     @EventHandler
     public void onPreInit (FMLPreInitializationEvent event) {
@@ -30,6 +33,7 @@ public class NoWorldgen5You {
         log = event.getModLog();
         WorldgenConfig.initConfig(event.getSuggestedConfigurationFile());
         MinecraftForge.TERRAIN_GEN_BUS.register(this);
+        SCATTERED_GEN = new MapGenScatteredFeaturesEmpty();
     }
 
     @SubscribeEvent
@@ -74,7 +78,7 @@ public class NoWorldgen5You {
                 break;
 
             case SCATTERED_FEATURE:
-                event.setNewGen(new MapGenScatteredFeaturesEmpty());
+                event.setNewGen(SCATTERED_GEN);
                 break;
 
             case STRONGHOLD:

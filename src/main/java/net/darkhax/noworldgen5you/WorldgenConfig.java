@@ -30,4 +30,12 @@ public class WorldgenConfig {
         syncConfigData();
         return result;
     }
+    
+    public static boolean isScateredStructureDisabled(String type) {
+        
+        config.setCategoryComment("scattered_structures", "This category requires the scattered map generator from the map_structures category to be disabled.");
+        final boolean result = config.getBoolean("disable_" + type, "scattered_structures", false, "Should " + type + " generation be disabled?");
+        syncConfigData();
+        return result;
+    }
 }
