@@ -1,5 +1,6 @@
 package net.darkhax.noworldgen5you;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.darkhax.noworldgen5you.world.gen.MapGenEmpty;
@@ -17,14 +18,16 @@ import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod(modid = "noworldgen5you", name = "No Worldgen 5 You", version = "@VERSION@", acceptedMinecraftVersions = "[1.12,1.12.2)")
+@Mod(modid = "noworldgen5you", name = "No Worldgen 5 You", version = "@VERSION@", acceptedMinecraftVersions = "[1.12,1.12.2)", certificateFingerprint = "@FINGERPRINT@")
 public class NoWorldgen5You {
 
-    private static Logger log;
+    
+    private static final Logger LOG = LogManager.getLogger("No Worldgen 5 You");
     
     //Done early for config reasons
     private static MapGenScatteredFeaturesEmpty SCATTERED_GEN;
@@ -32,7 +35,6 @@ public class NoWorldgen5You {
     @EventHandler
     public void onPreInit (FMLPreInitializationEvent event) {
 
-        log = event.getModLog();
         WorldgenConfig.initConfig(event.getSuggestedConfigurationFile());
         MinecraftForge.TERRAIN_GEN_BUS.register(this);
               
@@ -64,7 +66,7 @@ public class NoWorldgen5You {
                 break;
 
             case CUSTOM:
-                log.info("Attempting to replace {} with an empty map generator. If this causes a ClassCastException report it to the author of that mod and not the author of NoWorldgen5You");
+                LOG.info("Attempting to replace {} with an empty map generator. If this causes a ClassCastException report it to the author of that mod and not the author of NoWorldgen5You");
                 event.setNewGen(new MapGenEmpty());
                 break;
 
@@ -112,5 +114,11 @@ public class NoWorldgen5You {
                 break;
 
         }
+    }
+    
+    @EventHandler
+    public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
+        
+        LOG.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been tampered with. This version will NOT be supported by the author!");
     }
 }
