@@ -7,7 +7,6 @@ import java.util.Map;
 import net.darkhax.noworldgen5you.world.gen.MapGenScatteredFeaturesEmpty;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
-import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate;
 
 public class WorldgenConfig {
@@ -18,34 +17,34 @@ public class WorldgenConfig {
     public static Configuration initConfig (File file) {
 
         config = new Configuration(file);
-        
+
         config.setCategoryComment("map_structures", "Allows for various types of map generators to be disabled.");
-        
-        for (InitMapGenEvent.EventType type : InitMapGenEvent.EventType.values()) {
-            
+
+        for (final InitMapGenEvent.EventType type : InitMapGenEvent.EventType.values()) {
+
             if (type != InitMapGenEvent.EventType.CUSTOM) {
-                
+
                 isStructureDisabled(type.name().toLowerCase());
             }
         }
-        
+
         config.setCategoryComment("scattered_structures", "This category requires the scattered map generator from the map_structures category to be disabled.");
-        
-        for (MapGenScatteredFeaturesEmpty.Type type : MapGenScatteredFeaturesEmpty.Type.values()) {
-            
+
+        for (final MapGenScatteredFeaturesEmpty.Type type : MapGenScatteredFeaturesEmpty.Type.values()) {
+
             isScateredStructureDisabled(type.name().toLowerCase());
         }
-        
+
         config.setCategoryComment("map_populates", "Allows for various types of chunk populators to be disabled.");
-        
-        for (Populate.EventType type : Populate.EventType.values()) {
-            
+
+        for (final Populate.EventType type : Populate.EventType.values()) {
+
             if (type != Populate.EventType.CUSTOM) {
-                
+
                 isPopulateDisabled(type.name().toLowerCase());
             }
         }
-        
+
         syncConfigData();
         return config;
     }
@@ -62,13 +61,13 @@ public class WorldgenConfig {
         final boolean result = config.getBoolean("disable_" + type, "map_structures", false, "Should " + type + " generation be disabled?");
         return result;
     }
-    
-    public static boolean isScateredStructureDisabled(String type) {
-        
+
+    public static boolean isScateredStructureDisabled (String type) {
+
         final boolean result = config.getBoolean("disable_" + type, "scattered_structures", false, "Should " + type + " generation be disabled?");
         return result;
     }
-    
+
     public static boolean isPopulateDisabled (String type) {
 
         final boolean result = config.getBoolean("disable_" + type, "map_populates", false, "Should " + type + " generation be disabled?");

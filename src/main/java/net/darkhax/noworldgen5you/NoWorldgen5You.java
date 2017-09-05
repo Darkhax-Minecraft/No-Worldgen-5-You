@@ -14,7 +14,6 @@ import net.darkhax.noworldgen5you.world.gen.MapGenVillageEmpty;
 import net.darkhax.noworldgen5you.world.gen.MapGenWoodlandMansion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.InitMapGenEvent;
-import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -26,10 +25,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod(modid = "noworldgen5you", name = "No Worldgen 5 You", version = "@VERSION@", acceptedMinecraftVersions = "[1.12,1.12.2)", certificateFingerprint = "@FINGERPRINT@")
 public class NoWorldgen5You {
 
-    
     private static final Logger LOG = LogManager.getLogger("No Worldgen 5 You");
-    
-    //Done early for config reasons
+
+    // Done early for config reasons
     private static MapGenScatteredFeaturesEmpty SCATTERED_GEN;
 
     @EventHandler
@@ -37,20 +35,20 @@ public class NoWorldgen5You {
 
         WorldgenConfig.initConfig(event.getSuggestedConfigurationFile());
         MinecraftForge.TERRAIN_GEN_BUS.register(this);
-              
+
         // Config stuff
         SCATTERED_GEN = new MapGenScatteredFeaturesEmpty();
     }
 
     @SubscribeEvent
-    public void onChunkPopulated(Populate event) {
-        
+    public void onChunkPopulated (Populate event) {
+
         if (WorldgenConfig.isPopulateDisabled(event.getType().name().toLowerCase())) {
-            
+
             event.setResult(Result.DENY);
         }
     }
-    
+
     @SubscribeEvent
     public void onMapGen (InitMapGenEvent event) {
 
@@ -115,10 +113,10 @@ public class NoWorldgen5You {
 
         }
     }
-    
+
     @EventHandler
-    public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
-        
+    public void onFingerprintViolation (FMLFingerprintViolationEvent event) {
+
         LOG.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been tampered with. This version will NOT be supported by the author!");
     }
 }
