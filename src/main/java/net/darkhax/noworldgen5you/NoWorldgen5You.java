@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod(modid = "noworldgen5you", name = "No Worldgen 5 You", version = "@VERSION@", acceptedMinecraftVersions = "[1.12,1.12.2)", certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = "noworldgen5you", name = "No Worldgen 5 You", version = "@VERSION@", certificateFingerprint = "@FINGERPRINT@")
 public class NoWorldgen5You {
 
     private static final Logger LOG = LogManager.getLogger("No Worldgen 5 You");
